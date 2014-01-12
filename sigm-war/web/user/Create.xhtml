@@ -31,7 +31,7 @@
                     <h:outputLabel value="#{bundle.CreateUserLabel_lastName}" for="lastName" />
                     <h:inputText id="lastName" value="#{userController.selected.lastName}" title="#{bundle.CreateUserTitle_lastName}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_lastName}"/>
                     <h:outputLabel value="#{bundle.CreateUserLabel_rut}" for="rut" />
-                    <h:inputText id="rut" value="#{userController.selected.rut}" title="#{bundle.CreateUserTitle_rut}" />
+                    <h:inputText id="rut" value="#{userController.selected.rut}" title="#{bundle.CreateUserTitle_rut}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_rut}" />
                     <h:outputLabel value="#{bundle.CreateUserLabel_address}" for="address" />
                     <h:inputText id="address" value="#{userController.selected.address}" title="#{bundle.CreateUserTitle_address}" />
                     <h:outputLabel value="#{bundle.CreateUserLabel_birthday}" for="birthday" />

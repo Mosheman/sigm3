@@ -30,10 +30,8 @@ public class UserController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     
-    @EJB
-    private UserTypeFacadeLocal ejbUserTypeFacade;
-
     public UserController() {
+        
     }
 
     public User getSelected() {
@@ -82,16 +80,39 @@ public class UserController implements Serializable {
         selectedItemIndex = -1;
         return "Create";
     }
+    
+    //Verifica si el rut ingresado es válido.
+    public boolean esRutValido(String rutStrg) {
+        //Verifica si el string ingresado está vacío, si es así, retorna falso.
+        if (rutStrg.isEmpty())  return false;
+        //Si el campo no está vacío, se desglosa el string.
+        String rutParteNumStrg = rutStrg.substring(0, rutStrg.length() - 2);
+        int rut = Integer.parseInt(rutParteNumStrg);
+        Character dv = new Character(rutStrg.charAt(rutStrg.length() - 1));
+                
+        int m = 0, s = 1;
+        for (; rut != 0; rut /= 10)
+        {
+            s = (s + rut % 10 * (9 - m++ % 6)) % 11;
+        }
+        return dv == (char) (s != 0 ? s + 47 : 75);
+    }
 
-    public String create() {
+    public String create() {                      
         try {
+            //Antes de crear revisa si el rut es válido:
+            if (!esRutValido(current.getRut())) {
+                JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("CreateUserRequiredMessage_rut"));
+                return prepareCreate();
+            }
+            //Si el rut es válido, procede con la creación:
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UserCreated"));
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
-        }
+        }        
     }
 
     public String prepareEdit() {
