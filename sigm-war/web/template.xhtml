@@ -4,18 +4,61 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html">
     <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title><ui:insert name="title">Default Title</ui:insert></title>
-<h:outputStylesheet name="css/jsfcrud.css"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title><ui:insert name="title">Sistema SIGM</ui:insert></title>
+        <h:outputScript name="js/jquery.js"/>
+        <h:outputStylesheet name="css/font-awesome.css"/>
+        <h:outputStylesheet name="css/style.css"/>
     </h:head>
 
     <h:body>
-        <h1>
-            <ui:insert name="title">Default Title</ui:insert>
-        </h1>
-        <p>
-            <ui:insert name="body">Default Body</ui:insert>
-        </p>
+        <div id="wrapper">
+            <div class="header">
+                <div class="flash-message">
+                    
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div id="pageLogo"><div>SIGM</div></div>
+                        </div>
+                        <div class="col-xs-6" style="text-align: right; padding-top: 30px;">
+                                                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-title">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12" style="text-align: center">
+                            <ui:insert name="title">Default Title</ui:insert>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                            <ui:insert name="body">Default Body</ui:insert>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper-ghost"></div>
+            <div class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12" style="text-align: center;">FINGESO, 02-2013.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            setTimeout(function() {
+                $('.flash-message > .message').slideUp(800);
+            }, 3000);
+        </script>        
     </h:body>
-
 </html>
