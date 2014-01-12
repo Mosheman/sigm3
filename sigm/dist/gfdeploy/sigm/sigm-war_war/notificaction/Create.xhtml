@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateNotificactionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateNotificactionLabel_idNotification}" for="idNotification" />
+                    <h:inputText id="idNotification" value="#{notificactionController.selected.idNotification}" title="#{bundle.CreateNotificactionTitle_idNotification}" required="true" requiredMessage="#{bundle.CreateNotificactionRequiredMessage_idNotification}"/>
+                    <h:outputLabel value="#{bundle.CreateNotificactionLabel_notificationTitle}" for="notificationTitle" />
+                    <h:inputText id="notificationTitle" value="#{notificactionController.selected.notificationTitle}" title="#{bundle.CreateNotificactionTitle_notificationTitle}" />
+                    <h:outputLabel value="#{bundle.CreateNotificactionLabel_notificationDetail}" for="notificationDetail" />
+                    <h:inputTextarea rows="4" cols="30" id="notificationDetail" value="#{notificactionController.selected.notificationDetail}" title="#{bundle.CreateNotificactionTitle_notificationDetail}" />
+                    <h:outputLabel value="#{bundle.CreateNotificactionLabel_notificationCreatedAt}" for="notificationCreatedAt" />
+                    <h:inputText id="notificationCreatedAt" value="#{notificactionController.selected.notificationCreatedAt}" title="#{bundle.CreateNotificactionTitle_notificationCreatedAt}" required="true" requiredMessage="#{bundle.CreateNotificactionRequiredMessage_notificationCreatedAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateNotificactionLabel_notificationUpdatedAt}" for="notificationUpdatedAt" />
+                    <h:inputText id="notificationUpdatedAt" value="#{notificactionController.selected.notificationUpdatedAt}" title="#{bundle.CreateNotificactionTitle_notificationUpdatedAt}" required="true" requiredMessage="#{bundle.CreateNotificactionRequiredMessage_notificationUpdatedAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateNotificactionLabel_idMessage}" for="idMessage" />
+                    <h:selectOneMenu id="idMessage" value="#{notificactionController.selected.idMessage}" title="#{bundle.CreateNotificactionTitle_idMessage}" required="true" requiredMessage="#{bundle.CreateNotificactionRequiredMessage_idMessage}">
+                        <f:selectItems value="#{messageController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateNotificactionLabel_idUser}" for="idUser" />
+                    <h:selectOneMenu id="idUser" value="#{notificactionController.selected.idUser}" title="#{bundle.CreateNotificactionTitle_idUser}" required="true" requiredMessage="#{bundle.CreateNotificactionRequiredMessage_idUser}">
+                        <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{notificactionController.create}" value="#{bundle.CreateNotificactionSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{notificactionController.prepareList}" value="#{bundle.CreateNotificactionShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateNotificactionIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

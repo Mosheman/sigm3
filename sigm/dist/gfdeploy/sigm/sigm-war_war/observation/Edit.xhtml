@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditObservationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditObservationLabel_idObservation}" for="idObservation" />
+                    <h:inputText id="idObservation" value="#{observationController.selected.idObservation}" title="#{bundle.EditObservationTitle_idObservation}" required="true" requiredMessage="#{bundle.EditObservationRequiredMessage_idObservation}"/>
+                    <h:outputLabel value="#{bundle.EditObservationLabel_observationName}" for="observationName" />
+                    <h:inputText id="observationName" value="#{observationController.selected.observationName}" title="#{bundle.EditObservationTitle_observationName}" />
+                    <h:outputLabel value="#{bundle.EditObservationLabel_observationDetail}" for="observationDetail" />
+                    <h:inputTextarea rows="4" cols="30" id="observationDetail" value="#{observationController.selected.observationDetail}" title="#{bundle.EditObservationTitle_observationDetail}" />
+                    <h:outputLabel value="#{bundle.EditObservationLabel_observationCreatedAt}" for="observationCreatedAt" />
+                    <h:inputText id="observationCreatedAt" value="#{observationController.selected.observationCreatedAt}" title="#{bundle.EditObservationTitle_observationCreatedAt}" required="true" requiredMessage="#{bundle.EditObservationRequiredMessage_observationCreatedAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditObservationLabel_observationUpdatedAt}" for="observationUpdatedAt" />
+                    <h:inputText id="observationUpdatedAt" value="#{observationController.selected.observationUpdatedAt}" title="#{bundle.EditObservationTitle_observationUpdatedAt}" required="true" requiredMessage="#{bundle.EditObservationRequiredMessage_observationUpdatedAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditObservationLabel_idThesis}" for="idThesis" />
+                    <h:selectOneMenu id="idThesis" value="#{observationController.selected.idThesis}" title="#{bundle.EditObservationTitle_idThesis}" required="true" requiredMessage="#{bundle.EditObservationRequiredMessage_idThesis}">
+                        <f:selectItems value="#{thesisController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{observationController.update}" value="#{bundle.EditObservationSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditObservationViewLink}"/>
+                <br />
+                <h:commandLink action="#{observationController.prepareList}" value="#{bundle.EditObservationShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditObservationIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

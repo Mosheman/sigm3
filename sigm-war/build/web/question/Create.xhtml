@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateQuestionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateQuestionLabel_idQuestion}" for="idQuestion" />
+                    <h:inputText id="idQuestion" value="#{questionController.selected.idQuestion}" title="#{bundle.CreateQuestionTitle_idQuestion}" required="true" requiredMessage="#{bundle.CreateQuestionRequiredMessage_idQuestion}"/>
+                    <h:outputLabel value="#{bundle.CreateQuestionLabel_questionName}" for="questionName" />
+                    <h:inputText id="questionName" value="#{questionController.selected.questionName}" title="#{bundle.CreateQuestionTitle_questionName}" />
+                    <h:outputLabel value="#{bundle.CreateQuestionLabel_questionDetail}" for="questionDetail" />
+                    <h:inputTextarea rows="4" cols="30" id="questionDetail" value="#{questionController.selected.questionDetail}" title="#{bundle.CreateQuestionTitle_questionDetail}" />
+                    <h:outputLabel value="#{bundle.CreateQuestionLabel_questionCreatedAt}" for="questionCreatedAt" />
+                    <h:inputText id="questionCreatedAt" value="#{questionController.selected.questionCreatedAt}" title="#{bundle.CreateQuestionTitle_questionCreatedAt}" required="true" requiredMessage="#{bundle.CreateQuestionRequiredMessage_questionCreatedAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateQuestionLabel_questionUpdatedAt}" for="questionUpdatedAt" />
+                    <h:inputText id="questionUpdatedAt" value="#{questionController.selected.questionUpdatedAt}" title="#{bundle.CreateQuestionTitle_questionUpdatedAt}" required="true" requiredMessage="#{bundle.CreateQuestionRequiredMessage_questionUpdatedAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateQuestionLabel_questionVisibility}" for="questionVisibility" />
+                    <h:inputTextarea rows="4" cols="30" id="questionVisibility" value="#{questionController.selected.questionVisibility}" title="#{bundle.CreateQuestionTitle_questionVisibility}" />
+                    <h:outputLabel value="#{bundle.CreateQuestionLabel_idUser}" for="idUser" />
+                    <h:selectOneMenu id="idUser" value="#{questionController.selected.idUser}" title="#{bundle.CreateQuestionTitle_idUser}" required="true" requiredMessage="#{bundle.CreateQuestionRequiredMessage_idUser}">
+                        <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateQuestionLabel_idTopic}" for="idTopic" />
+                    <h:selectOneMenu id="idTopic" value="#{questionController.selected.idTopic}" title="#{bundle.CreateQuestionTitle_idTopic}" >
+                        <f:selectItems value="#{topicController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{questionController.create}" value="#{bundle.CreateQuestionSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{questionController.prepareList}" value="#{bundle.CreateQuestionShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateQuestionIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

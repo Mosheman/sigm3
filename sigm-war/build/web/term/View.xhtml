@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewTermTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewTermLabel_idTerm}"/>
+                    <h:outputText value="#{termController.selected.idTerm}" title="#{bundle.ViewTermTitle_idTerm}"/>
+                    <h:outputText value="#{bundle.ViewTermLabel_termStart}"/>
+                    <h:outputText value="#{termController.selected.termStart}" title="#{bundle.ViewTermTitle_termStart}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTermLabel_termEnd}"/>
+                    <h:outputText value="#{termController.selected.termEnd}" title="#{bundle.ViewTermTitle_termEnd}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTermLabel_termCreatedAt}"/>
+                    <h:outputText value="#{termController.selected.termCreatedAt}" title="#{bundle.ViewTermTitle_termCreatedAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTermLabel_idTermType}"/>
+                    <h:outputText value="#{termController.selected.idTermType}" title="#{bundle.ViewTermTitle_idTermType}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{termController.destroyAndView}" value="#{bundle.ViewTermDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewTermEditLink}"/>
+                <br />
+                <h:commandLink action="#{termController.prepareCreate}" value="#{bundle.ViewTermCreateLink}" />
+                <br />
+                <h:commandLink action="#{termController.prepareList}" value="#{bundle.ViewTermShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewTermIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

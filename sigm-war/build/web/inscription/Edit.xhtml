@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditInscriptionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditInscriptionLabel_idInscription}" for="idInscription" />
+                    <h:inputText id="idInscription" value="#{inscriptionController.selected.idInscription}" title="#{bundle.EditInscriptionTitle_idInscription}" required="true" requiredMessage="#{bundle.EditInscriptionRequiredMessage_idInscription}"/>
+                    <h:outputLabel value="#{bundle.EditInscriptionLabel_proposalDate}" for="proposalDate" />
+                    <h:inputText id="proposalDate" value="#{inscriptionController.selected.proposalDate}" title="#{bundle.EditInscriptionTitle_proposalDate}" required="true" requiredMessage="#{bundle.EditInscriptionRequiredMessage_proposalDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditInscriptionLabel_thesisIncriptionDate}" for="thesisIncriptionDate" />
+                    <h:inputText id="thesisIncriptionDate" value="#{inscriptionController.selected.thesisIncriptionDate}" title="#{bundle.EditInscriptionTitle_thesisIncriptionDate}" required="true" requiredMessage="#{bundle.EditInscriptionRequiredMessage_thesisIncriptionDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditInscriptionLabel_idTerm}" for="idTerm" />
+                    <h:selectOneMenu id="idTerm" value="#{inscriptionController.selected.idTerm}" title="#{bundle.EditInscriptionTitle_idTerm}" required="true" requiredMessage="#{bundle.EditInscriptionRequiredMessage_idTerm}">
+                        <f:selectItems value="#{termController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditInscriptionLabel_idThesis}" for="idThesis" />
+                    <h:selectOneMenu id="idThesis" value="#{inscriptionController.selected.idThesis}" title="#{bundle.EditInscriptionTitle_idThesis}" required="true" requiredMessage="#{bundle.EditInscriptionRequiredMessage_idThesis}">
+                        <f:selectItems value="#{thesisController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{inscriptionController.update}" value="#{bundle.EditInscriptionSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditInscriptionViewLink}"/>
+                <br />
+                <h:commandLink action="#{inscriptionController.prepareList}" value="#{bundle.EditInscriptionShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditInscriptionIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

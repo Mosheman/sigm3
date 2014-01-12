@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditDocumentTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditDocumentLabel_idDocument}" for="idDocument" />
+                    <h:inputText id="idDocument" value="#{documentController.selected.idDocument}" title="#{bundle.EditDocumentTitle_idDocument}" required="true" requiredMessage="#{bundle.EditDocumentRequiredMessage_idDocument}"/>
+                    <h:outputLabel value="#{bundle.EditDocumentLabel_documentAddress}" for="documentAddress" />
+                    <h:inputTextarea rows="4" cols="30" id="documentAddress" value="#{documentController.selected.documentAddress}" title="#{bundle.EditDocumentTitle_documentAddress}" />
+                    <h:outputLabel value="#{bundle.EditDocumentLabel_documentReceiptDate}" for="documentReceiptDate" />
+                    <h:inputText id="documentReceiptDate" value="#{documentController.selected.documentReceiptDate}" title="#{bundle.EditDocumentTitle_documentReceiptDate}" required="true" requiredMessage="#{bundle.EditDocumentRequiredMessage_documentReceiptDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditDocumentLabel_idThesis}" for="idThesis" />
+                    <h:selectOneMenu id="idThesis" value="#{documentController.selected.idThesis}" title="#{bundle.EditDocumentTitle_idThesis}" required="true" requiredMessage="#{bundle.EditDocumentRequiredMessage_idThesis}">
+                        <f:selectItems value="#{thesisController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditDocumentLabel_idDoctype}" for="idDoctype" />
+                    <h:selectOneMenu id="idDoctype" value="#{documentController.selected.idDoctype}" title="#{bundle.EditDocumentTitle_idDoctype}" required="true" requiredMessage="#{bundle.EditDocumentRequiredMessage_idDoctype}">
+                        <f:selectItems value="#{documentTypeController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditDocumentLabel_idUser}" for="idUser" />
+                    <h:selectOneMenu id="idUser" value="#{documentController.selected.idUser}" title="#{bundle.EditDocumentTitle_idUser}" required="true" requiredMessage="#{bundle.EditDocumentRequiredMessage_idUser}">
+                        <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{documentController.update}" value="#{bundle.EditDocumentSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditDocumentViewLink}"/>
+                <br />
+                <h:commandLink action="#{documentController.prepareList}" value="#{bundle.EditDocumentShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditDocumentIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

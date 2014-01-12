@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditDocumentTypeTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditDocumentTypeLabel_idDoctype}" for="idDoctype" />
+                    <h:inputText id="idDoctype" value="#{documentTypeController.selected.idDoctype}" title="#{bundle.EditDocumentTypeTitle_idDoctype}" required="true" requiredMessage="#{bundle.EditDocumentTypeRequiredMessage_idDoctype}"/>
+                    <h:outputLabel value="#{bundle.EditDocumentTypeLabel_doctypeName}" for="doctypeName" />
+                    <h:inputText id="doctypeName" value="#{documentTypeController.selected.doctypeName}" title="#{bundle.EditDocumentTypeTitle_doctypeName}" />
+                </h:panelGrid>
+                <h:commandLink action="#{documentTypeController.update}" value="#{bundle.EditDocumentTypeSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditDocumentTypeViewLink}"/>
+                <br />
+                <h:commandLink action="#{documentTypeController.prepareList}" value="#{bundle.EditDocumentTypeShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditDocumentTypeIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

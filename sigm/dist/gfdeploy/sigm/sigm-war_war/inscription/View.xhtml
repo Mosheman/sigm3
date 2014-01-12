@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewInscriptionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewInscriptionLabel_idInscription}"/>
+                    <h:outputText value="#{inscriptionController.selected.idInscription}" title="#{bundle.ViewInscriptionTitle_idInscription}"/>
+                    <h:outputText value="#{bundle.ViewInscriptionLabel_proposalDate}"/>
+                    <h:outputText value="#{inscriptionController.selected.proposalDate}" title="#{bundle.ViewInscriptionTitle_proposalDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewInscriptionLabel_thesisIncriptionDate}"/>
+                    <h:outputText value="#{inscriptionController.selected.thesisIncriptionDate}" title="#{bundle.ViewInscriptionTitle_thesisIncriptionDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewInscriptionLabel_idTerm}"/>
+                    <h:outputText value="#{inscriptionController.selected.idTerm}" title="#{bundle.ViewInscriptionTitle_idTerm}"/>
+                    <h:outputText value="#{bundle.ViewInscriptionLabel_idThesis}"/>
+                    <h:outputText value="#{inscriptionController.selected.idThesis}" title="#{bundle.ViewInscriptionTitle_idThesis}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{inscriptionController.destroyAndView}" value="#{bundle.ViewInscriptionDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewInscriptionEditLink}"/>
+                <br />
+                <h:commandLink action="#{inscriptionController.prepareCreate}" value="#{bundle.ViewInscriptionCreateLink}" />
+                <br />
+                <h:commandLink action="#{inscriptionController.prepareList}" value="#{bundle.ViewInscriptionShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewInscriptionIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

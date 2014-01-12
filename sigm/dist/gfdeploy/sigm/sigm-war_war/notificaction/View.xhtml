@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewNotificactionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewNotificactionLabel_idNotification}"/>
+                    <h:outputText value="#{notificactionController.selected.idNotification}" title="#{bundle.ViewNotificactionTitle_idNotification}"/>
+                    <h:outputText value="#{bundle.ViewNotificactionLabel_notificationTitle}"/>
+                    <h:outputText value="#{notificactionController.selected.notificationTitle}" title="#{bundle.ViewNotificactionTitle_notificationTitle}"/>
+                    <h:outputText value="#{bundle.ViewNotificactionLabel_notificationDetail}"/>
+                    <h:outputText value="#{notificactionController.selected.notificationDetail}" title="#{bundle.ViewNotificactionTitle_notificationDetail}"/>
+                    <h:outputText value="#{bundle.ViewNotificactionLabel_notificationCreatedAt}"/>
+                    <h:outputText value="#{notificactionController.selected.notificationCreatedAt}" title="#{bundle.ViewNotificactionTitle_notificationCreatedAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewNotificactionLabel_notificationUpdatedAt}"/>
+                    <h:outputText value="#{notificactionController.selected.notificationUpdatedAt}" title="#{bundle.ViewNotificactionTitle_notificationUpdatedAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewNotificactionLabel_idMessage}"/>
+                    <h:outputText value="#{notificactionController.selected.idMessage}" title="#{bundle.ViewNotificactionTitle_idMessage}"/>
+                    <h:outputText value="#{bundle.ViewNotificactionLabel_idUser}"/>
+                    <h:outputText value="#{notificactionController.selected.idUser}" title="#{bundle.ViewNotificactionTitle_idUser}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{notificactionController.destroyAndView}" value="#{bundle.ViewNotificactionDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewNotificactionEditLink}"/>
+                <br />
+                <h:commandLink action="#{notificactionController.prepareCreate}" value="#{bundle.ViewNotificactionCreateLink}" />
+                <br />
+                <h:commandLink action="#{notificactionController.prepareList}" value="#{bundle.ViewNotificactionShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewNotificactionIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewThesisTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewThesisLabel_idThesis}"/>
+                    <h:outputText value="#{thesisController.selected.idThesis}" title="#{bundle.ViewThesisTitle_idThesis}"/>
+                    <h:outputText value="#{bundle.ViewThesisLabel_thesisTitle}"/>
+                    <h:outputText value="#{thesisController.selected.thesisTitle}" title="#{bundle.ViewThesisTitle_thesisTitle}"/>
+                    <h:outputText value="#{bundle.ViewThesisLabel_thesisSubject}"/>
+                    <h:outputText value="#{thesisController.selected.thesisSubject}" title="#{bundle.ViewThesisTitle_thesisSubject}"/>
+                    <h:outputText value="#{bundle.ViewThesisLabel_thesisStatus}"/>
+                    <h:outputText value="#{thesisController.selected.thesisStatus}" title="#{bundle.ViewThesisTitle_thesisStatus}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{thesisController.destroyAndView}" value="#{bundle.ViewThesisDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewThesisEditLink}"/>
+                <br />
+                <h:commandLink action="#{thesisController.prepareCreate}" value="#{bundle.ViewThesisCreateLink}" />
+                <br />
+                <h:commandLink action="#{thesisController.prepareList}" value="#{bundle.ViewThesisShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewThesisIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

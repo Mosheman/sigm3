@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewThesisParticipationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewThesisParticipationLabel_idThesisParticipation}"/>
+                    <h:outputText value="#{thesisParticipationController.selected.idThesisParticipation}" title="#{bundle.ViewThesisParticipationTitle_idThesisParticipation}"/>
+                    <h:outputText value="#{bundle.ViewThesisParticipationLabel_thesisParticipationName}"/>
+                    <h:outputText value="#{thesisParticipationController.selected.thesisParticipationName}" title="#{bundle.ViewThesisParticipationTitle_thesisParticipationName}"/>
+                    <h:outputText value="#{bundle.ViewThesisParticipationLabel_thesisParticipationStart}"/>
+                    <h:outputText value="#{thesisParticipationController.selected.thesisParticipationStart}" title="#{bundle.ViewThesisParticipationTitle_thesisParticipationStart}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewThesisParticipationLabel_thesisParticipationEnd}"/>
+                    <h:outputText value="#{thesisParticipationController.selected.thesisParticipationEnd}" title="#{bundle.ViewThesisParticipationTitle_thesisParticipationEnd}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewThesisParticipationLabel_idThesis}"/>
+                    <h:outputText value="#{thesisParticipationController.selected.idThesis}" title="#{bundle.ViewThesisParticipationTitle_idThesis}"/>
+                    <h:outputText value="#{bundle.ViewThesisParticipationLabel_idUser}"/>
+                    <h:outputText value="#{thesisParticipationController.selected.idUser}" title="#{bundle.ViewThesisParticipationTitle_idUser}"/>
+                    <h:outputText value="#{bundle.ViewThesisParticipationLabel_idRole}"/>
+                    <h:outputText value="#{thesisParticipationController.selected.idRole}" title="#{bundle.ViewThesisParticipationTitle_idRole}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{thesisParticipationController.destroyAndView}" value="#{bundle.ViewThesisParticipationDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewThesisParticipationEditLink}"/>
+                <br />
+                <h:commandLink action="#{thesisParticipationController.prepareCreate}" value="#{bundle.ViewThesisParticipationCreateLink}" />
+                <br />
+                <h:commandLink action="#{thesisParticipationController.prepareList}" value="#{bundle.ViewThesisParticipationShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewThesisParticipationIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
