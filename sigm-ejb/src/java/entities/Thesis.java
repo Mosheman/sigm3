@@ -36,21 +36,22 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Thesis.findByThesisTitle", query = "SELECT t FROM Thesis t WHERE t.thesisTitle = :thesisTitle"),
     @NamedQuery(name = "Thesis.findByThesisSubject", query = "SELECT t FROM Thesis t WHERE t.thesisSubject = :thesisSubject"),
     @NamedQuery(name = "Thesis.findByThesisStatus", query = "SELECT t FROM Thesis t WHERE t.thesisStatus = :thesisStatus")})
-public class Thesis implements Serializable {
+public class Thesis implements Serializable {    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID_THESIS")
     private Integer idThesis;
-    @Size(max = 40)
+    @Size(max = 200)
     @Column(name = "THESIS_TITLE")
     private String thesisTitle;
-    @Size(max = 40)
+    @Size(max = 200)
     @Column(name = "THESIS_SUBJECT")
     private String thesisSubject;
+    @Size(max = 40)
     @Column(name = "THESIS_STATUS")
-    private Short thesisStatus;
+    private String thesisStatus;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idThesis")
     private Collection<Inscription> inscriptionCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idThesis")
@@ -90,15 +91,15 @@ public class Thesis implements Serializable {
     public void setThesisSubject(String thesisSubject) {
         this.thesisSubject = thesisSubject;
     }
-
-    public Short getThesisStatus() {
+    
+    public String getThesisStatus() {
         return thesisStatus;
     }
 
-    public void setThesisStatus(Short thesisStatus) {
+    public void setThesisStatus(String thesisStatus) {
         this.thesisStatus = thesisStatus;
     }
-
+    
     @XmlTransient
     public Collection<Inscription> getInscriptionCollection() {
         return inscriptionCollection;
@@ -157,7 +158,7 @@ public class Thesis implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Thesis[ idThesis=" + idThesis + " ]";
+        return thesisTitle;
     }
-    
+
 }
