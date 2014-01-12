@@ -113,16 +113,23 @@ public class UserController implements Serializable {
 
     public String create() {                      
         try {
-            //Antes de crear revisa si el rut es válido:
+            //Antes de crear, revisa si el rut es válido:
             if (!esRutValido(current.getRut())) {
                 JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("CreateUserRequiredMessage_rut"));
                 return prepareCreate();
             }
-            //Antes de crear revisa si el usuario ya existe de acuerdo a su rut.
+            //Antes de crear, revisa si el usuario ya existe de acuerdo a su rut.
             if (existeUsuarioRut(current)) {
-                JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("CreateUserRegisteredMessage_rut"));
+                JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("CreateUserRegistredMessage_rut"));
                 return prepareCreate();
             }
+            //Antes de crear, revisa si el número telefónico tiene una cantidad de dígitos suficientes.
+            int largoFono = current.getPhone().length();
+            if ((largoFono<6) || (largoFono>16)) {
+                JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("CreateUserRequiredMessage_phone"));
+                return prepareCreate();
+            }
+            
             //Si no hay errores de validación, procede con la creación:
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UserCreated"));
