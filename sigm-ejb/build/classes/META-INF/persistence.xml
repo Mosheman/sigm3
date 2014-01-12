@@ -3,6 +3,7 @@
   <persistence-unit name="sigm-ejbPU" transaction-type="JTA">
     <jta-data-source>sigm</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties/>
+    <properties>
+    </properties>
   </persistence-unit>
 </persistence>
