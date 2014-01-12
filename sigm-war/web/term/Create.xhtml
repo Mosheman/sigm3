@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateTermTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateTermLabel_idTerm}" for="idTerm" />
+                    <h:inputText id="idTerm" value="#{termController.selected.idTerm}" title="#{bundle.CreateTermTitle_idTerm}" required="true" requiredMessage="#{bundle.CreateTermRequiredMessage_idTerm}"/>
+                    <h:outputLabel value="#{bundle.CreateTermLabel_termStart}" for="termStart" />
+                    <h:inputText id="termStart" value="#{termController.selected.termStart}" title="#{bundle.CreateTermTitle_termStart}" required="true" requiredMessage="#{bundle.CreateTermRequiredMessage_termStart}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateTermLabel_termEnd}" for="termEnd" />
+                    <h:inputText id="termEnd" value="#{termController.selected.termEnd}" title="#{bundle.CreateTermTitle_termEnd}" required="true" requiredMessage="#{bundle.CreateTermRequiredMessage_termEnd}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateTermLabel_termCreatedAt}" for="termCreatedAt" />
+                    <h:inputText id="termCreatedAt" value="#{termController.selected.termCreatedAt}" title="#{bundle.CreateTermTitle_termCreatedAt}" required="true" requiredMessage="#{bundle.CreateTermRequiredMessage_termCreatedAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateTermLabel_idTermType}" for="idTermType" />
+                    <h:selectOneMenu id="idTermType" value="#{termController.selected.idTermType}" title="#{bundle.CreateTermTitle_idTermType}" required="true" requiredMessage="#{bundle.CreateTermRequiredMessage_idTermType}">
+                        <f:selectItems value="#{termTypeController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{termController.create}" value="#{bundle.CreateTermSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{termController.prepareList}" value="#{bundle.CreateTermShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateTermIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

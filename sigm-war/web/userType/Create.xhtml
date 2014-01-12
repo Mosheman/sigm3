@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateUserTypeTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateUserTypeLabel_idUserType}" for="idUserType" />
+                    <h:inputText id="idUserType" value="#{userTypeController.selected.idUserType}" title="#{bundle.CreateUserTypeTitle_idUserType}" required="true" requiredMessage="#{bundle.CreateUserTypeRequiredMessage_idUserType}"/>
+                    <h:outputLabel value="#{bundle.CreateUserTypeLabel_userTypeName}" for="userTypeName" />
+                    <h:inputText id="userTypeName" value="#{userTypeController.selected.userTypeName}" title="#{bundle.CreateUserTypeTitle_userTypeName}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{userTypeController.create}" value="#{bundle.CreateUserTypeSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{userTypeController.prepareList}" value="#{bundle.CreateUserTypeShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateUserTypeIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

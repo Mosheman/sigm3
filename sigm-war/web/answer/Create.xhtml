@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateAnswerTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateAnswerLabel_idAnswer}" for="idAnswer" />
+                    <h:inputText id="idAnswer" value="#{answerController.selected.idAnswer}" title="#{bundle.CreateAnswerTitle_idAnswer}" required="true" requiredMessage="#{bundle.CreateAnswerRequiredMessage_idAnswer}"/>
+                    <h:outputLabel value="#{bundle.CreateAnswerLabel_answerName}" for="answerName" />
+                    <h:inputText id="answerName" value="#{answerController.selected.answerName}" title="#{bundle.CreateAnswerTitle_answerName}" />
+                    <h:outputLabel value="#{bundle.CreateAnswerLabel_answerDetail}" for="answerDetail" />
+                    <h:inputTextarea rows="4" cols="30" id="answerDetail" value="#{answerController.selected.answerDetail}" title="#{bundle.CreateAnswerTitle_answerDetail}" />
+                    <h:outputLabel value="#{bundle.CreateAnswerLabel_answerCreatedAt}" for="answerCreatedAt" />
+                    <h:inputText id="answerCreatedAt" value="#{answerController.selected.answerCreatedAt}" title="#{bundle.CreateAnswerTitle_answerCreatedAt}" required="true" requiredMessage="#{bundle.CreateAnswerRequiredMessage_answerCreatedAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateAnswerLabel_anwerUpdatedAt}" for="anwerUpdatedAt" />
+                    <h:inputText id="anwerUpdatedAt" value="#{answerController.selected.anwerUpdatedAt}" title="#{bundle.CreateAnswerTitle_anwerUpdatedAt}" required="true" requiredMessage="#{bundle.CreateAnswerRequiredMessage_anwerUpdatedAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateAnswerLabel_answerVisibility}" for="answerVisibility" />
+                    <h:inputTextarea rows="4" cols="30" id="answerVisibility" value="#{answerController.selected.answerVisibility}" title="#{bundle.CreateAnswerTitle_answerVisibility}" />
+                    <h:outputLabel value="#{bundle.CreateAnswerLabel_idQuestion}" for="idQuestion" />
+                    <h:selectOneMenu id="idQuestion" value="#{answerController.selected.idQuestion}" title="#{bundle.CreateAnswerTitle_idQuestion}" >
+                        <f:selectItems value="#{questionController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateAnswerLabel_idUser}" for="idUser" />
+                    <h:selectOneMenu id="idUser" value="#{answerController.selected.idUser}" title="#{bundle.CreateAnswerTitle_idUser}" required="true" requiredMessage="#{bundle.CreateAnswerRequiredMessage_idUser}">
+                        <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{answerController.create}" value="#{bundle.CreateAnswerSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{answerController.prepareList}" value="#{bundle.CreateAnswerShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateAnswerIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

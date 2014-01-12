@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateThesisParticipationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateThesisParticipationLabel_idThesisParticipation}" for="idThesisParticipation" />
+                    <h:inputText id="idThesisParticipation" value="#{thesisParticipationController.selected.idThesisParticipation}" title="#{bundle.CreateThesisParticipationTitle_idThesisParticipation}" required="true" requiredMessage="#{bundle.CreateThesisParticipationRequiredMessage_idThesisParticipation}"/>
+                    <h:outputLabel value="#{bundle.CreateThesisParticipationLabel_thesisParticipationName}" for="thesisParticipationName" />
+                    <h:inputText id="thesisParticipationName" value="#{thesisParticipationController.selected.thesisParticipationName}" title="#{bundle.CreateThesisParticipationTitle_thesisParticipationName}" />
+                    <h:outputLabel value="#{bundle.CreateThesisParticipationLabel_thesisParticipationStart}" for="thesisParticipationStart" />
+                    <h:inputText id="thesisParticipationStart" value="#{thesisParticipationController.selected.thesisParticipationStart}" title="#{bundle.CreateThesisParticipationTitle_thesisParticipationStart}" required="true" requiredMessage="#{bundle.CreateThesisParticipationRequiredMessage_thesisParticipationStart}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateThesisParticipationLabel_thesisParticipationEnd}" for="thesisParticipationEnd" />
+                    <h:inputText id="thesisParticipationEnd" value="#{thesisParticipationController.selected.thesisParticipationEnd}" title="#{bundle.CreateThesisParticipationTitle_thesisParticipationEnd}" required="true" requiredMessage="#{bundle.CreateThesisParticipationRequiredMessage_thesisParticipationEnd}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateThesisParticipationLabel_idThesis}" for="idThesis" />
+                    <h:selectOneMenu id="idThesis" value="#{thesisParticipationController.selected.idThesis}" title="#{bundle.CreateThesisParticipationTitle_idThesis}" required="true" requiredMessage="#{bundle.CreateThesisParticipationRequiredMessage_idThesis}">
+                        <f:selectItems value="#{thesisController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateThesisParticipationLabel_idUser}" for="idUser" />
+                    <h:selectOneMenu id="idUser" value="#{thesisParticipationController.selected.idUser}" title="#{bundle.CreateThesisParticipationTitle_idUser}" required="true" requiredMessage="#{bundle.CreateThesisParticipationRequiredMessage_idUser}">
+                        <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateThesisParticipationLabel_idRole}" for="idRole" />
+                    <h:selectOneMenu id="idRole" value="#{thesisParticipationController.selected.idRole}" title="#{bundle.CreateThesisParticipationTitle_idRole}" required="true" requiredMessage="#{bundle.CreateThesisParticipationRequiredMessage_idRole}">
+                        <f:selectItems value="#{roleController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{thesisParticipationController.create}" value="#{bundle.CreateThesisParticipationSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{thesisParticipationController.prepareList}" value="#{bundle.CreateThesisParticipationShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateThesisParticipationIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

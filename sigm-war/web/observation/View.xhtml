@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewObservationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewObservationLabel_idObservation}"/>
+                    <h:outputText value="#{observationController.selected.idObservation}" title="#{bundle.ViewObservationTitle_idObservation}"/>
+                    <h:outputText value="#{bundle.ViewObservationLabel_observationName}"/>
+                    <h:outputText value="#{observationController.selected.observationName}" title="#{bundle.ViewObservationTitle_observationName}"/>
+                    <h:outputText value="#{bundle.ViewObservationLabel_observationDetail}"/>
+                    <h:outputText value="#{observationController.selected.observationDetail}" title="#{bundle.ViewObservationTitle_observationDetail}"/>
+                    <h:outputText value="#{bundle.ViewObservationLabel_observationCreatedAt}"/>
+                    <h:outputText value="#{observationController.selected.observationCreatedAt}" title="#{bundle.ViewObservationTitle_observationCreatedAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewObservationLabel_observationUpdatedAt}"/>
+                    <h:outputText value="#{observationController.selected.observationUpdatedAt}" title="#{bundle.ViewObservationTitle_observationUpdatedAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewObservationLabel_idThesis}"/>
+                    <h:outputText value="#{observationController.selected.idThesis}" title="#{bundle.ViewObservationTitle_idThesis}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{observationController.destroyAndView}" value="#{bundle.ViewObservationDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewObservationEditLink}"/>
+                <br />
+                <h:commandLink action="#{observationController.prepareCreate}" value="#{bundle.ViewObservationCreateLink}" />
+                <br />
+                <h:commandLink action="#{observationController.prepareList}" value="#{bundle.ViewObservationShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewObservationIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

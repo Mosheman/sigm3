@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateInscriptionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateInscriptionLabel_idInscription}" for="idInscription" />
+                    <h:inputText id="idInscription" value="#{inscriptionController.selected.idInscription}" title="#{bundle.CreateInscriptionTitle_idInscription}" required="true" requiredMessage="#{bundle.CreateInscriptionRequiredMessage_idInscription}"/>
+                    <h:outputLabel value="#{bundle.CreateInscriptionLabel_proposalDate}" for="proposalDate" />
+                    <h:inputText id="proposalDate" value="#{inscriptionController.selected.proposalDate}" title="#{bundle.CreateInscriptionTitle_proposalDate}" required="true" requiredMessage="#{bundle.CreateInscriptionRequiredMessage_proposalDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateInscriptionLabel_thesisIncriptionDate}" for="thesisIncriptionDate" />
+                    <h:inputText id="thesisIncriptionDate" value="#{inscriptionController.selected.thesisIncriptionDate}" title="#{bundle.CreateInscriptionTitle_thesisIncriptionDate}" required="true" requiredMessage="#{bundle.CreateInscriptionRequiredMessage_thesisIncriptionDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateInscriptionLabel_idTerm}" for="idTerm" />
+                    <h:selectOneMenu id="idTerm" value="#{inscriptionController.selected.idTerm}" title="#{bundle.CreateInscriptionTitle_idTerm}" required="true" requiredMessage="#{bundle.CreateInscriptionRequiredMessage_idTerm}">
+                        <f:selectItems value="#{termController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateInscriptionLabel_idThesis}" for="idThesis" />
+                    <h:selectOneMenu id="idThesis" value="#{inscriptionController.selected.idThesis}" title="#{bundle.CreateInscriptionTitle_idThesis}" required="true" requiredMessage="#{bundle.CreateInscriptionRequiredMessage_idThesis}">
+                        <f:selectItems value="#{thesisController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{inscriptionController.create}" value="#{bundle.CreateInscriptionSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{inscriptionController.prepareList}" value="#{bundle.CreateInscriptionShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateInscriptionIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

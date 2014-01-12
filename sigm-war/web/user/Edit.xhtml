@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditUserTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditUserLabel_idUser}" for="idUser" />
+                    <h:inputText id="idUser" value="#{userController.selected.idUser}" title="#{bundle.EditUserTitle_idUser}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_idUser}"/>
+                    <h:outputLabel value="#{bundle.EditUserLabel_userName}" for="userName" />
+                    <h:inputText id="userName" value="#{userController.selected.userName}" title="#{bundle.EditUserTitle_userName}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_userName}"/>
+                    <h:outputLabel value="#{bundle.EditUserLabel_userPass}" for="userPass" />
+                    <h:inputText id="userPass" value="#{userController.selected.userPass}" title="#{bundle.EditUserTitle_userPass}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_userPass}"/>
+                    <h:outputLabel value="#{bundle.EditUserLabel_userEmail}" for="userEmail" />
+                    <h:inputText id="userEmail" value="#{userController.selected.userEmail}" title="#{bundle.EditUserTitle_userEmail}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_userEmail}"/>
+                    <h:outputLabel value="#{bundle.EditUserLabel_userStatus}" for="userStatus" />
+                    <h:inputText id="userStatus" value="#{userController.selected.userStatus}" title="#{bundle.EditUserTitle_userStatus}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_userStatus}"/>
+                    <h:outputLabel value="#{bundle.EditUserLabel_userCreatedAt}" for="userCreatedAt" />
+                    <h:inputText id="userCreatedAt" value="#{userController.selected.userCreatedAt}" title="#{bundle.EditUserTitle_userCreatedAt}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_userCreatedAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditUserLabel_userUpdatedAt}" for="userUpdatedAt" />
+                    <h:inputText id="userUpdatedAt" value="#{userController.selected.userUpdatedAt}" title="#{bundle.EditUserTitle_userUpdatedAt}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_userUpdatedAt}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditUserLabel_firstName}" for="firstName" />
+                    <h:inputText id="firstName" value="#{userController.selected.firstName}" title="#{bundle.EditUserTitle_firstName}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_firstName}"/>
+                    <h:outputLabel value="#{bundle.EditUserLabel_lastName}" for="lastName" />
+                    <h:inputText id="lastName" value="#{userController.selected.lastName}" title="#{bundle.EditUserTitle_lastName}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_lastName}"/>
+                    <h:outputLabel value="#{bundle.EditUserLabel_rut}" for="rut" />
+                    <h:inputText id="rut" value="#{userController.selected.rut}" title="#{bundle.EditUserTitle_rut}" />
+                    <h:outputLabel value="#{bundle.EditUserLabel_address}" for="address" />
+                    <h:inputText id="address" value="#{userController.selected.address}" title="#{bundle.EditUserTitle_address}" />
+                    <h:outputLabel value="#{bundle.EditUserLabel_birthday}" for="birthday" />
+                    <h:inputText id="birthday" value="#{userController.selected.birthday}" title="#{bundle.EditUserTitle_birthday}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_birthday}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditUserLabel_phone}" for="phone" />
+                    <h:inputText id="phone" value="#{userController.selected.phone}" title="#{bundle.EditUserTitle_phone}" />
+                    <h:outputLabel value="#{bundle.EditUserLabel_departament}" for="departament" />
+                    <h:inputText id="departament" value="#{userController.selected.departament}" title="#{bundle.EditUserTitle_departament}" />
+                    <h:outputLabel value="#{bundle.EditUserLabel_interests}" for="interests" />
+                    <h:inputTextarea rows="4" cols="30" id="interests" value="#{userController.selected.interests}" title="#{bundle.EditUserTitle_interests}" />
+                    <h:outputLabel value="#{bundle.EditUserLabel_comments}" for="comments" />
+                    <h:inputTextarea rows="4" cols="30" id="comments" value="#{userController.selected.comments}" title="#{bundle.EditUserTitle_comments}" />
+                    <h:outputLabel value="#{bundle.EditUserLabel_enrollmentType}" for="enrollmentType" />
+                    <h:inputText id="enrollmentType" value="#{userController.selected.enrollmentType}" title="#{bundle.EditUserTitle_enrollmentType}" />
+                    <h:outputLabel value="#{bundle.EditUserLabel_lastEnrollment}" for="lastEnrollment" />
+                    <h:inputText id="lastEnrollment" value="#{userController.selected.lastEnrollment}" title="#{bundle.EditUserTitle_lastEnrollment}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditUserLabel_idUserType}" for="idUserType" />
+                    <h:selectOneMenu id="idUserType" value="#{userController.selected.idUserType}" title="#{bundle.EditUserTitle_idUserType}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_idUserType}">
+                        <f:selectItems value="#{userTypeController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{userController.update}" value="#{bundle.EditUserSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditUserViewLink}"/>
+                <br />
+                <h:commandLink action="#{userController.prepareList}" value="#{bundle.EditUserShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditUserIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

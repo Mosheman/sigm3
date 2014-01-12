@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateThesisTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateThesisLabel_idThesis}" for="idThesis" />
+                    <h:inputText id="idThesis" value="#{thesisController.selected.idThesis}" title="#{bundle.CreateThesisTitle_idThesis}" required="true" requiredMessage="#{bundle.CreateThesisRequiredMessage_idThesis}"/>
+                    <h:outputLabel value="#{bundle.CreateThesisLabel_thesisTitle}" for="thesisTitle" />
+                    <h:inputText id="thesisTitle" value="#{thesisController.selected.thesisTitle}" title="#{bundle.CreateThesisTitle_thesisTitle}" />
+                    <h:outputLabel value="#{bundle.CreateThesisLabel_thesisSubject}" for="thesisSubject" />
+                    <h:inputText id="thesisSubject" value="#{thesisController.selected.thesisSubject}" title="#{bundle.CreateThesisTitle_thesisSubject}" />
+                    <h:outputLabel value="#{bundle.CreateThesisLabel_thesisStatus}" for="thesisStatus" />
+                    <h:inputText id="thesisStatus" value="#{thesisController.selected.thesisStatus}" title="#{bundle.CreateThesisTitle_thesisStatus}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{thesisController.create}" value="#{bundle.CreateThesisSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{thesisController.prepareList}" value="#{bundle.CreateThesisShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateThesisIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
