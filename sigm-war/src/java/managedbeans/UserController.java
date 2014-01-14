@@ -6,6 +6,7 @@ import managedbeans.util.PaginationHelper;
 import sessionbeans.UserFacadeLocal;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -30,10 +31,8 @@ public class UserController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     
-    @EJB
-    private UserTypeFacadeLocal ejbUserTypeFacade;
-
     public UserController() {
+        
     }
 
     public User getSelected() {
@@ -82,16 +81,63 @@ public class UserController implements Serializable {
         selectedItemIndex = -1;
         return "Create";
     }
+    
+    public boolean existeUsuarioRut(User currentUser) {
+        List<User> usuarios = ejbFacade.findAll();
+        for(int i = 0; i < usuarios.size(); i++) {
+            if (usuarios.get(i).getRut().equalsIgnoreCase(currentUser.getRut())) {
+                return true;
+            }            
+        }
+        return false;            
+    }
+    
+    //Verifica si el rut ingresado es válido.
+    public boolean esRutValido(String rutStrg) {
+        //Verifica si el string ingresado está vacío, si es así, retorna falso.
+        if (rutStrg.isEmpty())  return false;
+        
+        //Si el campo no está vacío, se desglosa el string.
+        String rutParteNumStrg = rutStrg.substring(0, rutStrg.length() - 2);
+        int rut = Integer.parseInt(rutParteNumStrg);
+        Character dv = new Character(rutStrg.charAt(rutStrg.length() - 1));
+        
+        //Codigo de validación de rut sacado de: http://deerme.org/java/validacion-de-rut-en-java
+        int m = 0, s = 1;
+        for (; rut != 0; rut /= 10)
+        {
+            s = (s + rut % 10 * (9 - m++ % 6)) % 11;
+        }
+        return dv == (char) (s != 0 ? s + 47 : 75);
+    }
 
-    public String create() {
+    public String create() {                      
         try {
+            //Antes de crear, revisa si el rut es válido:
+            if (!esRutValido(current.getRut())) {
+                JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("CreateUserRequiredMessage_rut"));
+                return prepareCreate();
+            }
+            //Antes de crear, revisa si el usuario ya existe de acuerdo a su rut.
+            if (existeUsuarioRut(current)) {
+                JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("CreateUserRegistredMessage_rut"));
+                return prepareCreate();
+            }
+            //Antes de crear, revisa si el número telefónico tiene una cantidad de dígitos suficientes.
+            int largoFono = current.getPhone().length();
+            if ((largoFono<6) || (largoFono>16)) {
+                JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("CreateUserRequiredMessage_phone"));
+                return prepareCreate();
+            }
+            
+            //Si no hay errores de validación, procede con la creación:
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UserCreated"));
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
-        }
+        }        
     }
 
     public String prepareEdit() {

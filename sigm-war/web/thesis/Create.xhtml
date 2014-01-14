@@ -15,14 +15,17 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateThesisLabel_idThesis}" for="idThesis" />
-                    <h:inputText id="idThesis" value="#{thesisController.selected.idThesis}" title="#{bundle.CreateThesisTitle_idThesis}" required="true" requiredMessage="#{bundle.CreateThesisRequiredMessage_idThesis}"/>
                     <h:outputLabel value="#{bundle.CreateThesisLabel_thesisTitle}" for="thesisTitle" />
-                    <h:inputText id="thesisTitle" value="#{thesisController.selected.thesisTitle}" title="#{bundle.CreateThesisTitle_thesisTitle}" />
+                    <h:inputText id="thesisTitle" value="#{thesisController.selected.thesisTitle}" title="#{bundle.CreateThesisTitle_thesisTitle}" required="true" requiredMessage="#{bundle.EditTermRequiredMessage_thesisTitle}"/>
                     <h:outputLabel value="#{bundle.CreateThesisLabel_thesisSubject}" for="thesisSubject" />
-                    <h:inputText id="thesisSubject" value="#{thesisController.selected.thesisSubject}" title="#{bundle.CreateThesisTitle_thesisSubject}" />
+                    <h:inputText id="thesisSubject" value="#{thesisController.selected.thesisSubject}" title="#{bundle.CreateThesisTitle_thesisSubject}" required="true" requiredMessage="#{bundle.EditTermRequiredMessage_thesisSubject}"/>
                     <h:outputLabel value="#{bundle.CreateThesisLabel_thesisStatus}" for="thesisStatus" />
-                    <h:inputText id="thesisStatus" value="#{thesisController.selected.thesisStatus}" title="#{bundle.CreateThesisTitle_thesisStatus}" />
+                    <h:selectOneMenu id="thesisStatus" value="#{thesisController.selected.thesisStatus}" title="#{bundle.CreateThesisTitle_thesisStatus}">
+                        <f:selectItem itemValue="Pendiente" itemLabel="Pendiente" />
+                        <f:selectItem itemValue="Caduco" itemLabel="Caduco" />
+                        <f:selectItem itemValue="Vigente" itemLabel="Vigente" />
+                        <f:selectItem itemValue="Titulado" itemLabel="Titulado" />
+                    </h:selectOneMenu>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{thesisController.create}" value="#{bundle.CreateThesisSaveLink}" />
