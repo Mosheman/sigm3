@@ -22,25 +22,25 @@
                         <div class="col-xs-6">
                             <div id="pageLogo"><div>SIGM</div></div>
                         </div>
-                        <div class="col-xs-6" style="text-align: right; padding-top: 30px;">
-                                                        
-                        </div>
                     </div>
                 </div>
             </div>
-            <div class="main-title">
-                <div class="container">
-                    <div class="row">
-                        <div class="span12" style="text-align: center">
-                            <ui:insert name="title">Default Title</ui:insert>
-                        </div>
+            <div class="container">
+                <div class="row title-view">
+                    <div class="col-xs-12">
+                        <h2><ui:insert name="title"></ui:insert></h2>
+                        <hr></hr>
                     </div>
                 </div>
             </div>
+            
             <div class="main-body">
                 <div class="container">
                     <div class="row">
-                        <div class="span12">
+                        <div class="col-xs-3">
+                            <ui:include src="side-bar.xhtml" />
+                        </div>
+                        <div class="col-xs-9">
                             <ui:insert name="body">Default Body</ui:insert>
                         </div>
                     </div>
