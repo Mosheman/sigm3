@@ -101,7 +101,7 @@ public class UserType implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.UserType[ idUserType=" + idUserType + " ]";
+        return getUserTypeName();
     }
     
 }
