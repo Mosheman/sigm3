@@ -191,6 +191,18 @@ public class ThesisController implements Serializable {
     public Thesis getThesis(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
+    
+    public String generarExcelParticipacionTesis() {
+    
+        try {
+            ejbFacade.generarExcelParticipacionTesis();
+            JsfUtil.addSuccessMessage("Reporte de participantes de Tesis, creado.");
+            return prepareList();
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage(e, "Error al generar el reporte de participantes de Tesis.");
+            return null;
+        }
+    }
 
     @FacesConverter(forClass = Thesis.class)
     public static class ThesisControllerConverter implements Converter {

@@ -6,7 +6,11 @@
 
 package sessionbeans;
 
+import OtherClases.ThesisView;
 import entities.ThesisParticipation;
+import java.util.Collection;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,6 +24,13 @@ public class ThesisParticipationFacade extends AbstractFacade<ThesisParticipatio
     @PersistenceContext(unitName = "sigm-ejbPU")
     private EntityManager em;
 
+    @EJB
+    ThesisFacadeLocal thesisLocal;
+    @EJB
+    UserFacadeLocal UserLocal;
+    @EJB
+    RoleFacadeLocal roleLocal;
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;

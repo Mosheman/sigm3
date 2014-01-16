@@ -30,5 +30,5 @@ public interface ThesisParticipationFacadeLocal {
     List<ThesisParticipation> findRange(int[] range);
 
     int count();
-    
+        
 }

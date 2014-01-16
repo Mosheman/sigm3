@@ -31,4 +31,6 @@ public interface ThesisFacadeLocal {
 
     int count();
     
+    void generarExcelParticipacionTesis()throws Exception;
+    
 }
