@@ -7,10 +7,8 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,14 +19,12 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -56,8 +52,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByEnrollmentType", query = "SELECT u FROM User u WHERE u.enrollmentType = :enrollmentType"),
     @NamedQuery(name = "User.findByLastEnrollment", query = "SELECT u FROM User u WHERE u.lastEnrollment = :lastEnrollment")})
 public class User implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
-    private Collection<Observation> observationCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,7 +65,7 @@ public class User implements Serializable {
     private String userName;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 40)
+    @Size(min = 1, max = 128)
     @Column(name = "USER_PASS")
     private String userPass;
     @Basic(optional = false)
@@ -88,12 +82,12 @@ public class User implements Serializable {
     @Column(name = "USER_CREATED_AT")
     @Temporal(TemporalType.TIMESTAMP)
     private Date userCreatedAt;
-    @Basic(optional = true)
+    @Basic(optional = false)
     @NotNull
     @Column(name = "USER_UPDATED_AT")
     @Temporal(TemporalType.TIMESTAMP)
     private Date userUpdatedAt;
-    @Basic(optional = true)
+    @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 40)
     @Column(name = "FIRST_NAME")
@@ -135,21 +129,9 @@ public class User implements Serializable {
     @Column(name = "LAST_ENROLLMENT")
     @Temporal(TemporalType.DATE)
     private Date lastEnrollment;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
-    private Collection<Question> questionCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
-    private Collection<Document> documentCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
-    private Collection<Topic> topicCollection;
     @JoinColumn(name = "ID_USER_TYPE", referencedColumnName = "ID_USER_TYPE")
     @ManyToOne(optional = false)
     private UserType idUserType;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
-    private Collection<Answer> answerCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
-    private Collection<Notificaction> notificactionCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
-    private Collection<ThesisParticipation> thesisParticipationCollection;
 
     public User() {
         
@@ -228,8 +210,7 @@ public class User implements Serializable {
     }
 
     public void setUserCreatedAt(Date userCreatedAt) {
-        java.util.Date date = new java.util.Date();
-        this.userCreatedAt = (Date) date.clone();
+        this.userCreatedAt = userCreatedAt;
     }
 
     public Date getUserUpdatedAt() {
@@ -237,8 +218,7 @@ public class User implements Serializable {
     }
 
     public void setUserUpdatedAt(Date userUpdatedAt) {
-        java.util.Date date = new java.util.Date();
-        this.userUpdatedAt = (Date) date.clone();
+        this.userUpdatedAt = userUpdatedAt;
     }
 
     public String getFirstName() {
@@ -329,66 +309,12 @@ public class User implements Serializable {
         this.lastEnrollment = lastEnrollment;
     }
 
-    @XmlTransient
-    public Collection<Question> getQuestionCollection() {
-        return questionCollection;
-    }
-
-    public void setQuestionCollection(Collection<Question> questionCollection) {
-        this.questionCollection = questionCollection;
-    }
-
-    @XmlTransient
-    public Collection<Document> getDocumentCollection() {
-        return documentCollection;
-    }
-
-    public void setDocumentCollection(Collection<Document> documentCollection) {
-        this.documentCollection = documentCollection;
-    }
-
-    @XmlTransient
-    public Collection<Topic> getTopicCollection() {
-        return topicCollection;
-    }
-
-    public void setTopicCollection(Collection<Topic> topicCollection) {
-        this.topicCollection = topicCollection;
-    }
-
     public UserType getIdUserType() {
         return idUserType;
     }
 
     public void setIdUserType(UserType idUserType) {
         this.idUserType = idUserType;
-    }
-
-    @XmlTransient
-    public Collection<Answer> getAnswerCollection() {
-        return answerCollection;
-    }
-
-    public void setAnswerCollection(Collection<Answer> answerCollection) {
-        this.answerCollection = answerCollection;
-    }
-
-    @XmlTransient
-    public Collection<Notificaction> getNotificactionCollection() {
-        return notificactionCollection;
-    }
-
-    public void setNotificactionCollection(Collection<Notificaction> notificactionCollection) {
-        this.notificactionCollection = notificactionCollection;
-    }
-
-    @XmlTransient
-    public Collection<ThesisParticipation> getThesisParticipationCollection() {
-        return thesisParticipationCollection;
-    }
-
-    public void setThesisParticipationCollection(Collection<ThesisParticipation> thesisParticipationCollection) {
-        this.thesisParticipationCollection = thesisParticipationCollection;
     }
 
     @Override
@@ -414,15 +340,6 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "entities.User[ idUser=" + idUser + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Observation> getObservationCollection() {
-        return observationCollection;
-    }
-
-    public void setObservationCollection(Collection<Observation> observationCollection) {
-        this.observationCollection = observationCollection;
     }
     
 }

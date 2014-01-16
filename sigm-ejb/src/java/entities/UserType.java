@@ -53,9 +53,6 @@ public class UserType implements Serializable {
     public UserType(Integer idUserType) {
         this.idUserType = idUserType;
     }
-    public UserType(String idUserType) {
-        this.idUserType = Integer.parseInt(idUserType);
-    }
 
     public Integer getIdUserType() {
         return idUserType;
@@ -104,7 +101,7 @@ public class UserType implements Serializable {
 
     @Override
     public String toString() {
-        return userTypeName;
+        return "entities.UserType[ idUserType=" + idUserType + " ]";
     }
     
 }

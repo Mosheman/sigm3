@@ -32,8 +32,8 @@
                             <label for="userPass">#{bundle.CreateUserLabel_userStatus}</label>
                             <h:selectOneMenu id="userStatus" class="form-control" value="#{userController.selected.userStatus}" title="#{bundle.CreateUserTitle_userStatus}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_userStatus}">
                                 <f:selectItem itemValue="0" itemLabel="Activado" />
-                                <f:selectItem itemValue="1" itemLabel="Desactivado" />	   							
-                            </h:selectOneMenu>	
+                                <f:selectItem itemValue="1" itemLabel="Desactivado" />                                                                   
+                            </h:selectOneMenu>        
                         </div>
                         <div class="form-group">
                             <label for="firstName">#{bundle.CreateUserLabel_firstName}</label>
@@ -53,8 +53,9 @@
                         </div>
                         <div class="form-group">
                             <h:outputLabel value="#{bundle.CreateUserLabel_birthday}" for="birthday" />
-                            <input type="date" class="form-control" value="#{userController.selected.birthday}" title="#{bundle.CreateUserTitle_birthday}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_birthday}"/>
-                            
+                            <h:inputText id="birthday" class="form-control" value="#{userController.selected.birthday}" title="#{bundle.CreateUserTitle_birthday}" >
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:inputText>                            
                         </div>
                         <div class="form-group">
                             <h:outputLabel value="#{bundle.CreateUserLabel_phone}" for="phone" />
@@ -78,7 +79,7 @@
                             <h:outputLabel value="#{bundle.CreateUserLabel_enrollmentType}" for="enrollmentType" />
                             <h:selectOneMenu id="enrollmentType" class="form-control" value="#{userController.selected.enrollmentType}" title="#{bundle.CreateUserTitle_enrollmentType}" required="true">
                                 <f:selectItem itemValue="Contrato" itemLabel="Contrato" />
-                                <f:selectItem itemValue="Matricula" itemLabel="Matricula" />	   							
+                                <f:selectItem itemValue="Matricula" itemLabel="Matricula" />                                                                   
                             </h:selectOneMenu>
                         </div>
                         <div class="form-group">
